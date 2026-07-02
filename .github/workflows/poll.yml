@@ -32,3 +32,5 @@ jobs:
       - uses: gautamkrishnar/keepalive-workflow@v2
         with:
           use_api: true
+
+# amora-mail poll pinger

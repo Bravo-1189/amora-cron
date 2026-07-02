@@ -22,7 +22,7 @@ jobs:
           code=$(curl -s -o /tmp/resp.json -w '%{http_code}' \
             --max-time 300 \
             -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
-            "https://amora-mail.vercel.app/api/cron/poll")
+            "https://hgsy-mail.vercel.app/api/cron/poll")
           echo "HTTP $code"; cat /tmp/resp.json || true
           [ "$code" = "200" ]
 

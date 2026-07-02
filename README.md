@@ -1,6 +1,6 @@
 # amora-cron
 
-Pinger for [Amora Mail](https://amora-mail.vercel.app): hits the background poll
+Pinger for [Amora Mail](https://hgsy-mail.vercel.app): hits the background poll
 endpoint every ~5 minutes so incoming email is fetched and automatic AI replies
 are generated/sent even when nobody has the app open.
 

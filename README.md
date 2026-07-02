@@ -6,3 +6,5 @@ are generated/sent even when nobody has the app open.
 
 The endpoint is protected by a secret (`CRON_SECRET`, stored as a GitHub Actions
 secret here and as a Vercel env var there). This repo contains no credentials.
+
+<!-- ping amora-mail.vercel.app -->

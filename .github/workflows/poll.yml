@@ -7,7 +7,6 @@ on:
 
 permissions:
   actions: write
-  contents: write
 
 concurrency:
   group: poll
@@ -24,13 +23,15 @@ jobs:
             --max-time 300 \
             -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
             "https://amora-mail.vercel.app/api/cron/poll")
-          echo "HTTP $code"
-          cat /tmp/resp.json || true
+          echo "HTTP $code"; cat /tmp/resp.json || true
           [ "$code" = "200" ]
-      # GitHub disables scheduled workflows after 60 days without repo activity;
-      # this step re-enables the workflow via the API so the pinger never dies.
-      - uses: gautamkrishnar/keepalive-workflow@v2
-        with:
-          use_api: true
 
-# amora-mail poll pinger
+      # GitHub disables scheduled workflows after 60 days of repo inactivity. This
+      # native step (no third-party action) keeps the schedule enabled by
+      # re-enabling the workflow via the API on every run.
+      - name: Keep the schedule alive
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh workflow enable "Poll Amora Mail" --repo "${{ github.repository }}" || true
